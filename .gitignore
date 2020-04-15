@@ -4,3 +4,4 @@
 *.jar
 #Not to include any log file.
 *.log
+/build/
