@@ -1,0 +1,7 @@
+#Not to include any class file.
+*.class
+#Not to include any jar file.
+*.jar
+#Not to include any log file.
+*.log
+/build/
