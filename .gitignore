@@ -5,3 +5,5 @@
 #Not to include any log file.
 *.log
 /build/
+#Property loading path must not be checked in.
+LoadProperties.java
