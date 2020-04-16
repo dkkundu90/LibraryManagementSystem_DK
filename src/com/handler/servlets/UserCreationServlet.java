@@ -43,7 +43,9 @@ public class UserCreationServlet extends HttpServlet {
 		userService = new UserServiceImpl();
 		
 		if (request.getParameter("cancelOperation").equals(properties.getPropertyForValue("goBack"))) {
-			session.removeAttribute("genderListCreation");
+			if (session != null) {
+				session.removeAttribute("genderListCreation");
+			}
 			
 			request.setAttribute("page", properties.getPropertyForValue("goBack"));
 		} else {
