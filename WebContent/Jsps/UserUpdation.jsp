@@ -25,9 +25,7 @@
 			{
 				var userValueAsString = [];
 				
-				if (document.userUpdationContainer1.userDropDownValuesForUpdation.value != -1
-						&& document.userUpdationContainer1.userFirstName.value != ''
-						&& isNaN(document.userUpdationContainer1.userFirstName.value)) {
+				if (!userDropDownValidationForUpdation()) {
 					
 					validateUpdate();
 					
@@ -205,8 +203,7 @@
 		<table id="tableValidationMessages">
 			<tr>
 				<td id="userDropDownValidationCheck" style="visibility: hidden;">
-					<label style="font-weight: bold; color: red;" >** Please select a user and fetch Details for him/her.</label><br>
-					<label style="font-weight: bold; color: red;" >Also make sure to enter a valid first name.</label>
+					<label style="font-weight: bold; color: red;" >** Please select a user and fetch Details for him/her.</label>
 				</td>
 			</tr>
 			<tr>

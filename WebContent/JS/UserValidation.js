@@ -4,7 +4,7 @@
 
 // Methods For Validation Of An User Update.
 function validateGetUserDetailsBeforeUpdate() {
-	 if (!userDropDownValidationForUpdation()) {
+	 if (userDropDownValidationForUpdation()) {
 		 document.getElementById("userDropDownValidationCheck").style = 'visibility: visible;';
 		 event.preventDefault();
 	 } else {
@@ -13,10 +13,17 @@ function validateGetUserDetailsBeforeUpdate() {
 }
 
 function userDropDownValidationForUpdation() {
-	return !(document.userUpdationContainer1.userDropDownValuesForUpdation.value == -1);
+	return (document.userUpdationContainer1.userDropDownValuesForUpdation.value == -1);
 }
 
 function validateUpdate() {
+	if (userFirstNameValidationForUpdate()) {
+		 document.getElementById("userFirstNameCheck").style = 'visibility: visible;';
+		 event.preventDefault();
+	 } else {
+		 document.getElementById("userFirstNameCheck").style = 'visibility: hidden;';
+	}
+
 	if (userLastNameValidationForUpdate()) {
 		 document.getElementById("userLastNameCheck").style = 'visibility: visible;';
 		 event.preventDefault();
@@ -51,6 +58,11 @@ function validateUpdate() {
 	 } else {
 		 document.getElementById("userAgeCheck").style = 'visibility: hidden;';
 	}
+}
+
+function userFirstNameValidationForUpdate() {
+	return (!(isNaN(document.userUpdationContainer1.userFirstName.value))
+		|| document.userUpdationContainer1.userFirstName.value == '');
 }
 
 function userLastNameValidationForUpdate() {
