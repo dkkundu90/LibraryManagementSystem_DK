@@ -23,9 +23,14 @@
 		    
 			function submitFormToUpdate()
 			{
+				var userValueAsString = [];
+				
 				if (document.userUpdationContainer1.userDropDownValuesForUpdation.value != -1
-						&& document.userUpdationContainer1.userFirstName.value != '') {
-				  	var userValueAsString = [];
+						&& document.userUpdationContainer1.userFirstName.value != ''
+						&& isNaN(document.userUpdationContainer1.userFirstName.value)) {
+					
+					validateUpdate();
+					
 				  	userValueAsString.push(document.userUpdationContainer1.userFirstName.value);
 				  	userValueAsString.push(document.userUpdationContainer1.userLastName.value);
 				  	userValueAsString.push(document.userUpdationContainer1.userAddress.value);
@@ -115,7 +120,7 @@
 										display: inline-block;
 										font-size: 15px;
 										margin: 4px 2px;
-										cursor: pointer;" onclick="javascript:validateUpdation()" value="Get Details">
+										cursor: pointer;" onclick="javascript:validateGetUserDetailsBeforeUpdate()" value="Get Details">
 					</td>
 				</tr>
 				<tr id="userDataShow" style="visibility: hidden; ">
@@ -197,10 +202,41 @@
 			<input type="hidden" name="userUpdationShowDataEnabler" value="<%=isUserUpdationReady%>">
 			<input type="hidden" name="userUpdatedValue">
 		</form>
-		<table>
+		<table id="tableValidationMessages">
 			<tr>
 				<td id="userDropDownValidationCheck" style="visibility: hidden;">
-					<label style="font-weight: bold; color: red;" >** Please select a user and fetch Details for him/her.</label>
+					<label style="font-weight: bold; color: red;" >** Please select a user and fetch Details for him/her.</label><br>
+					<label style="font-weight: bold; color: red;" >Also make sure to enter a valid first name.</label>
+				</td>
+			</tr>
+			<tr>
+				<td id="userFirstNameCheck" style="visibility: hidden;">
+					<label style="font-weight: bold; color: red;" >** Please enter a valid first name for the user.</label>
+				</td>
+			</tr>
+			<tr>
+				<td id="userLastNameCheck" style="visibility: hidden;">
+					<label style="font-weight: bold; color: red;" >** Please enter a valid last name for the user.</label>
+				</td>
+			</tr>
+			<tr>
+				<td id="userAddressCheck" style="visibility: hidden;">
+					<label style="font-weight: bold; color: red;" >** Please enter a valid address for the user.</label>
+				</td>
+			</tr>
+			<tr>
+				<td id="userMobileCheck" style="visibility: hidden;">
+					<label style="font-weight: bold; color: red;" >** Please enter a valid mobile number for the user.</label>
+				</td>
+			</tr>
+			<tr>
+				<td id="userEmailCheck" style="visibility: hidden;">
+					<label style="font-weight: bold; color: red;" >** Please enter a valid email address for the user.</label>
+				</td>
+			</tr>
+			<tr>
+				<td id="userAgeCheck" style="visibility: hidden;">
+					<label style="font-weight: bold; color: red;" >** Please enter a valid Age for the user. The user be at least 10 years old.</label>
 				</td>
 			</tr>
 		</table>

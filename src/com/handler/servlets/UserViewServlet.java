@@ -33,7 +33,9 @@ public class UserViewServlet extends HttpServlet {
 		logger.info(properties.getPropertyForValue("servletEntry") + UserCreationServlet.class);
 		session = request.getSession(false);
 		request.setAttribute("page", UserViewServlet.class);
-		session.removeAttribute("userValuesForView");
+		if (session != null) {
+			session.removeAttribute("userValuesForView");
+		}
 		request.getRequestDispatcher(properties.getPropertyForValue("handelRequest")).forward(request, response);
 		logger.info(properties.getPropertyForValue("servletExit") + UserCreationServlet.class);
 	}

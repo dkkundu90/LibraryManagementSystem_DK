@@ -64,9 +64,11 @@ public class UserUpdationServlet extends HttpServlet {
 		userBean = new UserBean();
 
 		if (request.getParameter("cancelOperation").equals(properties.getPropertyForValue("goBack"))) {
-			session.removeAttribute("userValue");
-			session.removeAttribute("genderListUpdation");
-			session.removeAttribute("userDropDownValuesForUpdation");
+			if (session != null) {
+				session.removeAttribute("userValue");
+				session.removeAttribute("genderListUpdation");
+				session.removeAttribute("userDropDownValuesForUpdation");
+			}
 			
 			request.setAttribute("page", properties.getPropertyForValue("goBack")); 
 		} else {

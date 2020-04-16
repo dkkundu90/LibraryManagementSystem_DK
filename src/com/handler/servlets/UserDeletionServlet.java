@@ -40,7 +40,9 @@ public class UserDeletionServlet extends HttpServlet {
 		userService = new UserServiceImpl();
 		
 		if (request.getParameter("cancelOperation").equals(properties.getPropertyForValue("goBack"))) {
-			session.removeAttribute("userDropDownValuesForDeletion");
+			if (session != null) {
+				session.removeAttribute("userDropDownValuesForDeletion");
+			}
 			
 			request.setAttribute("page", properties.getPropertyForValue("goBack"));
 		} else {
