@@ -17,5 +17,5 @@ public interface UserService {
 	
 	public UserBean readUserInfoById(Integer userId) throws ServiceException;
 	
-	public List<UserDropDownBean> getAllUserNames() throws ServiceException;
+	public List<UserDropDownBean> readAllUserNames() throws ServiceException;
 }

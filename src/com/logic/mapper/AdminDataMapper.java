@@ -3,7 +3,7 @@ package com.logic.mapper;
 import com.data.bean.AdminBean;
 import com.repo.dao.AdminDao;
 
-public class LogInDataMapper {
+public class AdminDataMapper {
 	private AdminDao adminDao;
 	private AdminBean adminBean;
 	

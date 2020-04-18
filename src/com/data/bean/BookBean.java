@@ -1,14 +1,14 @@
-package com.repo.dao;
+package com.data.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
-public class BookDao {
+public class BookBean {
 	private Integer bookId;
 	private String bookName;
 	private String authorName;
-	private Timestamp issueDate;
-	private Timestamp submissionDate;
-	private Timestamp availaibilityDate;
+	private Date issueDate;
+	private Date submissionDate;
+	private Date availaibilityDate;
 	private Character readytoreIssue;
 	private Integer currentUserIssued;
 	private Integer genreId;
@@ -31,22 +31,22 @@ public class BookDao {
 	public void setAuthorName(String authorName) {
 		this.authorName = authorName;
 	}
-	public Timestamp getIssueDate() {
+	public Date getIssueDate() {
 		return issueDate;
 	}
-	public void setIssueDate(Timestamp issueDate) {
+	public void setIssueDate(Date issueDate) {
 		this.issueDate = issueDate;
 	}
-	public Timestamp getSubmissionDate() {
+	public Date getSubmissionDate() {
 		return submissionDate;
 	}
-	public void setSubmissionDate(Timestamp submissionDate) {
+	public void setSubmissionDate(Date submissionDate) {
 		this.submissionDate = submissionDate;
 	}
-	public Timestamp getAvailaibilityDate() {
+	public Date getAvailaibilityDate() {
 		return availaibilityDate;
 	}
-	public void setAvailaibilityDate(Timestamp availaibilityDate) {
+	public void setAvailaibilityDate(Date availaibilityDate) {
 		this.availaibilityDate = availaibilityDate;
 	}
 	public Character getReadytoreIssue() {

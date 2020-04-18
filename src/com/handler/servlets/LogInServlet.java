@@ -14,15 +14,15 @@ import com.data.bean.AdminBean;
 import com.gen.exception.ServiceException;
 import com.gen.util.AppLogger;
 import com.gen.util.LoadProperties;
-import com.logic.service.LogInService;
-import com.logic.service.Implementation.LogInServiceImpl;
+import com.logic.service.AdminService;
+import com.logic.service.Implementation.AdminServiceImpl;
 
 public class LogInServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Logger logger = null;
 	private LoadProperties properties;
 	
-	private LogInService logInService;
+	private AdminService adminService;
 	private AdminBean adminBean;
 	
     public LogInServlet() {
@@ -37,7 +37,7 @@ public class LogInServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		logger.info(properties.getPropertyForValue("servletEntry") + LogInServlet.class);
 		adminBean = new AdminBean();
-		logInService = new LogInServiceImpl();
+		adminService = new AdminServiceImpl();
 		String adminName = request.getParameter("adminName");
 		String password = request.getParameter("password");
 		
@@ -46,7 +46,7 @@ public class LogInServlet extends HttpServlet {
 			adminBean.setPassword(password);
 			
 			try {
-				adminBean = logInService.readLogInInfo(adminBean);
+				adminBean = adminService.readLogInInfo(adminBean);
 				request.setAttribute("basicUserInfo", adminBean);
 				if (adminBean.getAdminId()!= null) {
 					HttpSession session = request.getSession();

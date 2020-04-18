@@ -64,7 +64,9 @@ public class UserCreationServlet extends HttpServlet {
 			} catch (ServiceException serviceException) {
 				logger.error((serviceException.toString() + "\n" + serviceException.getMessage()));
 			} finally {
-				session.removeAttribute("genderListCreation");
+				if (session != null) {
+					session.removeAttribute("genderListCreation");
+				}
 			}
 			
 			if (userBean.getUserId() != null) {

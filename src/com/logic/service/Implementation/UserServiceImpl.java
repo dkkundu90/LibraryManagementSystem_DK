@@ -102,7 +102,7 @@ public class UserServiceImpl implements UserService {
 		userAdapter = new UserAdapterImpl();
 		
 		try {
-			List<UserDao> users = userAdapter.readAllUsers();
+			List<UserDao> users = userAdapter.getAllUsers();
 			UserBean userBean;
 			
 			for (UserDao dao : users) {
@@ -126,7 +126,7 @@ public class UserServiceImpl implements UserService {
 		userAdapter = new UserAdapterImpl();
 		
 		try {
-			UserDao user = userAdapter.readUserById(userId);
+			UserDao user = userAdapter.getUserById(userId);
 			
 			userBean = userDataMapper.mapDaoDataToBean(user, ApplicationConstants.VALUE_TRUE);
 		} catch (DBException dbException) {
@@ -138,14 +138,14 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public List<UserDropDownBean> getAllUserNames() throws ServiceException {
+	public List<UserDropDownBean> readAllUserNames() throws ServiceException {
 		logger.info(properties.getPropertyForValue("serviceEntry") + UserServiceImpl.class);
 		List<UserDropDownBean> dropDownBeans = new ArrayList<UserDropDownBean>();
 		userDataMapper = new UserDataMapper();
 		userAdapter = new UserAdapterImpl();
 		
 		try {
-			List<UserDao> users = userAdapter.readAllUserNamesWithIds();
+			List<UserDao> users = userAdapter.getAllUserNamesWithIds();
 			UserDropDownBean userDropDownBean;
 			
 			for (UserDao dao : users) {
