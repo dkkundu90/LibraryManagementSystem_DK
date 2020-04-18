@@ -3,68 +3,68 @@ package com.data.bean;
 import java.util.Date;
 
 public class BookBean {
-	private Integer bookid;
-	private String bookname;
-	private String authorname;
-	private Date issuedate;
-	private Date submissiondate;
-	private Date availaibilitydate;
-	private Character readytoreissue;
-	private Integer currentuserissued;
-	private Integer genreid;
+	private Integer bookId;
+	private String bookName;
+	private String authorName;
+	private Date issueDate;
+	private Date submissionDate;
+	private Date availaibilityDate;
+	private Character readytoreIssue;
+	private Integer currentUserIssued;
+	private Integer genreId;
 	
-	public Integer getBookid() {
-		return bookid;
+	public Integer getBookId() {
+		return bookId;
 	}
-	public void setBookid(Integer bookid) {
-		this.bookid = bookid;
+	public void setBookId(Integer bookId) {
+		this.bookId = bookId;
 	}
-	public String getBookname() {
-		return bookname;
+	public String getBookName() {
+		return bookName;
 	}
-	public void setBookname(String bookname) {
-		this.bookname = bookname;
+	public void setBookName(String bookName) {
+		this.bookName = bookName;
 	}
-	public String getAuthorname() {
-		return authorname;
+	public String getAuthorName() {
+		return authorName;
 	}
-	public void setAuthorname(String authorname) {
-		this.authorname = authorname;
+	public void setAuthorName(String authorName) {
+		this.authorName = authorName;
 	}
-	public Date getIssuedate() {
-		return issuedate;
+	public Date getIssueDate() {
+		return issueDate;
 	}
-	public void setIssuedate(Date issuedate) {
-		this.issuedate = issuedate;
+	public void setIssueDate(Date issueDate) {
+		this.issueDate = issueDate;
 	}
-	public Date getSubmissiondate() {
-		return submissiondate;
+	public Date getSubmissionDate() {
+		return submissionDate;
 	}
-	public void setSubmissiondate(Date submissiondate) {
-		this.submissiondate = submissiondate;
+	public void setSubmissionDate(Date submissionDate) {
+		this.submissionDate = submissionDate;
 	}
-	public Date getAvailaibilitydate() {
-		return availaibilitydate;
+	public Date getAvailaibilityDate() {
+		return availaibilityDate;
 	}
-	public void setAvailaibilitydate(Date availaibilitydate) {
-		this.availaibilitydate = availaibilitydate;
+	public void setAvailaibilityDate(Date availaibilityDate) {
+		this.availaibilityDate = availaibilityDate;
 	}
-	public Character getReadytoreissue() {
-		return readytoreissue;
+	public Character getReadytoreIssue() {
+		return readytoreIssue;
 	}
-	public void setReadytoreissue(Character readytoreissue) {
-		this.readytoreissue = readytoreissue;
+	public void setReadytoreIssue(Character readytoreIssue) {
+		this.readytoreIssue = readytoreIssue;
 	}
-	public Integer getCurrentuserissued() {
-		return currentuserissued;
+	public Integer getCurrentUserIssued() {
+		return currentUserIssued;
 	}
-	public void setCurrentuserissued(Integer currentuserissued) {
-		this.currentuserissued = currentuserissued;
+	public void setCurrentUserIssued(Integer currentUserIssued) {
+		this.currentUserIssued = currentUserIssued;
 	}
-	public Integer getGenreid() {
-		return genreid;
+	public Integer getGenreId() {
+		return genreId;
 	}
-	public void setGenreid(Integer genreid) {
-		this.genreid = genreid;
+	public void setGenreId(Integer genreId) {
+		this.genreId = genreId;
 	}
 }

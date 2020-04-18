@@ -45,21 +45,21 @@ public class UserAdapterImpl implements UserAdapter{
 			preparedStatement.executeQuery();
 			ResultSet userSequenceResultSet = preparedStatement.getResultSet();
 			if (userSequenceResultSet.next()) {
-				newUserId = userSequenceResultSet.getInt(1);
+				newUserId = userSequenceResultSet.getInt(ApplicationConstants.VALUE_ONE);
 			}
 			
 			String sqlInsertQuery = properties.getPropertyForValue("userInsert");
 			preparedStatement = con.prepareStatement(sqlInsertQuery);
 			
-			preparedStatement.setInt(1, newUserId);
+			preparedStatement.setInt(ApplicationConstants.VALUE_ONE, newUserId);
 			if (userDao != null) {
-				preparedStatement.setString(2, userDao.getFirstName());
-				preparedStatement.setString(3, userDao.getLastName());
-				preparedStatement.setString(4, userDao.getAddress());
-				preparedStatement.setString(5, userDao.getMobile());
-				preparedStatement.setString(6, userDao.getEmail());
-				preparedStatement.setInt(7, userDao.getAge());
-				preparedStatement.setString(8, userDao.getGender().toString());
+				preparedStatement.setString(ApplicationConstants.VALUE_TWO, userDao.getFirstName());
+				preparedStatement.setString(ApplicationConstants.VALUE_THREE, userDao.getLastName());
+				preparedStatement.setString(ApplicationConstants.VALUE_FOUR, userDao.getAddress());
+				preparedStatement.setString(ApplicationConstants.VALUE_FIVE, userDao.getMobile());
+				preparedStatement.setString(ApplicationConstants.VALUE_SIX, userDao.getEmail());
+				preparedStatement.setInt(ApplicationConstants.VALUE_SEVEN, userDao.getAge());
+				preparedStatement.setString(ApplicationConstants.VALUE_EIGHT, userDao.getGender().toString());
 			}
 			
 			insertionCompletionStatus = preparedStatement.executeUpdate();
@@ -91,14 +91,14 @@ public class UserAdapterImpl implements UserAdapter{
 			preparedStatement = con.prepareStatement(sqlUpdateQuery);
 			
 			if (userDao != null) {
-				preparedStatement.setString(1, userDao.getFirstName());
-				preparedStatement.setString(2, userDao.getLastName());
-				preparedStatement.setString(3, userDao.getAddress());
-				preparedStatement.setString(4, userDao.getMobile());
-				preparedStatement.setString(5, userDao.getEmail());
-				preparedStatement.setInt(6, userDao.getAge());
-				preparedStatement.setString(7, userDao.getGender().toString());
-				preparedStatement.setInt(8, userDao.getUserId());
+				preparedStatement.setString(ApplicationConstants.VALUE_ONE, userDao.getFirstName());
+				preparedStatement.setString(ApplicationConstants.VALUE_TWO, userDao.getLastName());
+				preparedStatement.setString(ApplicationConstants.VALUE_THREE, userDao.getAddress());
+				preparedStatement.setString(ApplicationConstants.VALUE_FOUR, userDao.getMobile());
+				preparedStatement.setString(ApplicationConstants.VALUE_FIVE, userDao.getEmail());
+				preparedStatement.setInt(ApplicationConstants.VALUE_SIX, userDao.getAge());
+				preparedStatement.setString(ApplicationConstants.VALUE_SEVEN, userDao.getGender().toString());
+				preparedStatement.setInt(ApplicationConstants.VALUE_EIGHT, userDao.getUserId());
 			}
 			
 			updationCompletionStatus = preparedStatement.executeUpdate();
@@ -129,7 +129,7 @@ public class UserAdapterImpl implements UserAdapter{
 			deletionCompletionStatus = null;
 			String sqlDeleteQuery = properties.getPropertyForValue("userDelete");
 			preparedStatement = con.prepareStatement(sqlDeleteQuery);
-			preparedStatement.setInt(1, userId);
+			preparedStatement.setInt(ApplicationConstants.VALUE_ONE, userId);
 			
 			deletionCompletionStatus = preparedStatement.executeUpdate();
 			
@@ -166,14 +166,14 @@ public class UserAdapterImpl implements UserAdapter{
 			while (rs.next()) {
 				userDao = new UserDao();
 				
-				userDao.setUserId(rs.getInt(1));
-				userDao.setFirstName(rs.getString(2));
-				userDao.setLastName(rs.getString(3));
-				userDao.setAddress(rs.getString(4));
-				userDao.setMobile(rs.getString(5));
-				userDao.setEmail(rs.getString(6));
-				userDao.setAge(rs.getInt(7));
-				userDao.setGender(rs.getString(8).charAt(ApplicationConstants.VALUE_ZERO));
+				userDao.setUserId(rs.getInt(ApplicationConstants.VALUE_ONE));
+				userDao.setFirstName(rs.getString(ApplicationConstants.VALUE_TWO));
+				userDao.setLastName(rs.getString(ApplicationConstants.VALUE_THREE));
+				userDao.setAddress(rs.getString(ApplicationConstants.VALUE_FOUR));
+				userDao.setMobile(rs.getString(ApplicationConstants.VALUE_FIVE));
+				userDao.setEmail(rs.getString(ApplicationConstants.VALUE_SIX));
+				userDao.setAge(rs.getInt(ApplicationConstants.VALUE_SEVEN));
+				userDao.setGender(rs.getString(ApplicationConstants.VALUE_EIGHT).charAt(ApplicationConstants.VALUE_ZERO));
 				
 				userDaos.add(userDao);
 			}
@@ -198,21 +198,21 @@ public class UserAdapterImpl implements UserAdapter{
 			
 			String sqlQuery = properties.getPropertyForValue("userLookupSelect");
 			preparedStatement = con.prepareStatement(sqlQuery);
-			preparedStatement.setInt(1, userId);
+			preparedStatement.setInt(ApplicationConstants.VALUE_ONE, userId);
 			
 			ResultSet rs = preparedStatement.executeQuery();
 			
 			if (rs.next()) {
 				userDao = new UserDao();
 				
-				userDao.setUserId(rs.getInt(1));
-				userDao.setFirstName(rs.getString(2));
-				userDao.setLastName(rs.getString(3));
-				userDao.setAddress(rs.getString(4));
-				userDao.setMobile(rs.getString(5));
-				userDao.setEmail(rs.getString(6));
-				userDao.setAge(rs.getInt(7));
-				userDao.setGender(rs.getString(8).charAt(ApplicationConstants.VALUE_ZERO));
+				userDao.setUserId(rs.getInt(ApplicationConstants.VALUE_ONE));
+				userDao.setFirstName(rs.getString(ApplicationConstants.VALUE_TWO));
+				userDao.setLastName(rs.getString(ApplicationConstants.VALUE_THREE));
+				userDao.setAddress(rs.getString(ApplicationConstants.VALUE_FOUR));
+				userDao.setMobile(rs.getString(ApplicationConstants.VALUE_FIVE));
+				userDao.setEmail(rs.getString(ApplicationConstants.VALUE_SIX));
+				userDao.setAge(rs.getInt(ApplicationConstants.VALUE_SEVEN));
+				userDao.setGender(rs.getString(ApplicationConstants.VALUE_EIGHT).charAt(ApplicationConstants.VALUE_ZERO));
 			}
 		} catch(SQLException sqlException) {
 			logger.error((sqlException.getMessage()));
@@ -241,9 +241,9 @@ public class UserAdapterImpl implements UserAdapter{
 			while (rs.next()) {
 				userDao = new UserDao();
 				
-				userDao.setUserId(rs.getInt(1));
-				userDao.setFirstName(rs.getString(2));
-				userDao.setLastName(rs.getString(3));
+				userDao.setUserId(rs.getInt(ApplicationConstants.VALUE_ONE));
+				userDao.setFirstName(rs.getString(ApplicationConstants.VALUE_TWO));
+				userDao.setLastName(rs.getString(ApplicationConstants.VALUE_THREE));
 				
 				userDaos.add(userDao);
 			}

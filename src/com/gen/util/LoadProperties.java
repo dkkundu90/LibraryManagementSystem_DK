@@ -12,7 +12,7 @@ public class LoadProperties {
 	
 	public LoadProperties() {
 		try {
-			reader = new FileReader("");
+			reader = new FileReader("D:/E/JavaPrac/LibraryManagementSystem_Diptendu_Kundu/WebContent/Properties/Application.properties");
 			
 			properties = new Properties();
 			properties.load(reader); 

@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 
 import com.gen.exception.DBException;
 import com.gen.util.AppLogger;
+import com.gen.util.ApplicationConstants;
 import com.gen.util.DataBaseConnection;
 import com.gen.util.LoadProperties;
 import com.repo.adapter.AdminAdapter;
@@ -37,15 +38,15 @@ public class AdminAdapterImpl implements AdminAdapter {
 			
 			preparedStatement = con.prepareStatement(sqlQuery); 
 			if (adminDao != null) {
-				preparedStatement.setString(1, adminDao.getAdminName());
-				preparedStatement.setString(2, adminDao.getPassword());
+				preparedStatement.setString(ApplicationConstants.VALUE_ONE, adminDao.getAdminName());
+				preparedStatement.setString(ApplicationConstants.VALUE_TWO, adminDao.getPassword());
 			}
 			ResultSet rs = preparedStatement.executeQuery();
 			
 			if(rs.next()) {
 				logger.info("User exits. " + AdminAdapterImpl.class);
-				adminDao.setAdminId(rs.getInt(1));
-				adminDao.setAdminName(rs.getString(2));
+				adminDao.setAdminId(rs.getInt(ApplicationConstants.VALUE_ONE));
+				adminDao.setAdminName(rs.getString(ApplicationConstants.VALUE_TWO));
 			}
 		} catch(SQLException sqlException) {
 			logger.error((sqlException.getMessage()));
