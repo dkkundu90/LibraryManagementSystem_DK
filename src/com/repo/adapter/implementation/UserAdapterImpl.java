@@ -150,7 +150,7 @@ public class UserAdapterImpl implements UserAdapter{
 	}
 
 	@Override
-	public List<UserDao> readAllUsers() throws DBException {
+	public List<UserDao> getAllUsers() throws DBException {
 		logger.info(properties.getPropertyForValue("adapterEntry") + UserAdapterImpl.class);
 		List<UserDao> userDaos = new ArrayList<UserDao>();
 		
@@ -188,7 +188,7 @@ public class UserAdapterImpl implements UserAdapter{
 	}
 	
 	@Override
-	public UserDao readUserById(Integer userId) throws DBException {
+	public UserDao getUserById(Integer userId) throws DBException {
 		logger.info(properties.getPropertyForValue("adapterEntry") + UserAdapterImpl.class);
 		UserDao userDao = null;
 		
@@ -225,7 +225,7 @@ public class UserAdapterImpl implements UserAdapter{
 	}
 	
 	@Override
-	public List<UserDao> readAllUserNamesWithIds() throws DBException {
+	public List<UserDao> getAllUserNamesWithIds() throws DBException {
 		logger.info(properties.getPropertyForValue("adapterEntry") + UserAdapterImpl.class);
 		List<UserDao> userDaos = new ArrayList<UserDao>();
 		

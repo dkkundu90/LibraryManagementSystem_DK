@@ -71,7 +71,7 @@ public class BookAdapterImpl implements BookAdapter {
 	}
 
 	@Override
-	public Boolean getAllBookIdsByUserId(Integer userId) throws DBException {
+	public Boolean getBookLookUpByUserId(Integer userId) throws DBException {
 		logger.info(properties.getPropertyForValue("adapterEntry") + BookAdapterImpl.class);
 		Boolean IsBookIssuedForUser = ApplicationConstants.VALUE_FALSE;
 		
@@ -86,7 +86,7 @@ public class BookAdapterImpl implements BookAdapter {
 			ResultSet rs = preparedStatement.executeQuery();
 			
 			if(rs.next()) {
-				logger.info("Atleast one Book is ussed to this users." + LogInAdapterImpl.class);
+				logger.info("Atleast one Book is ussed to this users." + AdminAdapterImpl.class);
 				IsBookIssuedForUser = ApplicationConstants.VALUE_TRUE;
 			}
 		} catch(SQLException sqlException) {

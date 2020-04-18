@@ -12,9 +12,9 @@ public interface UserAdapter {
 	
 	public Integer delete(Integer userId) throws DBException;
 	
-	public List<UserDao> readAllUsers() throws DBException;
+	public List<UserDao> getAllUsers() throws DBException;
 	
-	public UserDao readUserById(Integer userId) throws DBException;
+	public UserDao getUserById(Integer userId) throws DBException;
 	
-	public List<UserDao> readAllUserNamesWithIds() throws DBException;
+	public List<UserDao> getAllUserNamesWithIds() throws DBException;
 }

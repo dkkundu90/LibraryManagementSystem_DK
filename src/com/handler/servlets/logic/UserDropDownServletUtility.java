@@ -32,7 +32,7 @@ public class UserDropDownServletUtility {
 		userService = new UserServiceImpl();
 
 		try {
-			userDropDownBeans = userService.getAllUserNames();
+			userDropDownBeans = userService.readAllUserNames();
 			request.setAttribute("userDropDownBeans", userDropDownBeans);
 		} catch (ServiceException serviceException) {
 			logger.error((serviceException.toString() + "\n" + serviceException.getMessage()));

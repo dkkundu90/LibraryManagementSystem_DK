@@ -1,6 +1,5 @@
 package com.logic.service;
 
-import com.gen.exception.DBException;
 import com.gen.exception.ServiceException;
 
 public interface BookService {

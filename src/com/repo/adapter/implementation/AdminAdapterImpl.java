@@ -11,24 +11,24 @@ import com.gen.exception.DBException;
 import com.gen.util.AppLogger;
 import com.gen.util.DataBaseConnection;
 import com.gen.util.LoadProperties;
-import com.repo.adapter.LogInAdapter;
+import com.repo.adapter.AdminAdapter;
 import com.repo.dao.AdminDao;
 
-public class LogInAdapterImpl implements LogInAdapter {
+public class AdminAdapterImpl implements AdminAdapter {
 	private Logger logger = null;
 	private LoadProperties properties;
 	
 	private PreparedStatement preparedStatement;
 	private DataBaseConnection dataBaseConnection;
 	
-	public LogInAdapterImpl() {
+	public AdminAdapterImpl() {
 		logger = AppLogger.getLogger();
     	properties = new LoadProperties();
 	}
 
 	@Override
-	public void read(AdminDao adminDao) throws DBException {
-		logger.info(properties.getPropertyForValue("adapterEntry") + LogInAdapterImpl.class);
+	public void getAdminLookupById(AdminDao adminDao) throws DBException {
+		logger.info(properties.getPropertyForValue("adapterEntry") + AdminAdapterImpl.class);
 		try {
 			dataBaseConnection = new DataBaseConnection();
 			Connection con = dataBaseConnection.newConnection();  
@@ -43,7 +43,7 @@ public class LogInAdapterImpl implements LogInAdapter {
 			ResultSet rs = preparedStatement.executeQuery();
 			
 			if(rs.next()) {
-				logger.info("User exits. " + LogInAdapterImpl.class);
+				logger.info("User exits. " + AdminAdapterImpl.class);
 				adminDao.setAdminId(rs.getInt(1));
 				adminDao.setAdminName(rs.getString(2));
 			}
@@ -53,6 +53,6 @@ public class LogInAdapterImpl implements LogInAdapter {
 		} finally {
 			dataBaseConnection.closeConnection();
 		}
-		logger.info("User does not exits. " + properties.getPropertyForValue("adapterExit") + LogInAdapterImpl.class);
+		logger.info("User does not exits. " + properties.getPropertyForValue("adapterExit") + AdminAdapterImpl.class);
 	}
 }

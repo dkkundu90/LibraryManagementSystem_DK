@@ -9,5 +9,5 @@ public interface BookAdapter {
 	
 	public List<BookDao> getAllBooksByUserId(Integer userId) throws DBException;
 	
-	public Boolean getAllBookIdsByUserId(Integer userId) throws DBException;
+	public Boolean getBookLookUpByUserId(Integer userId) throws DBException;
 }

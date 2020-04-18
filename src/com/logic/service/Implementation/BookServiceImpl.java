@@ -29,7 +29,7 @@ public class BookServiceImpl implements  BookService {
 		bookAdapter = new BookAdapterImpl();
 		
 		try {
-			IsBookIssuedForUser = bookAdapter.getAllBookIdsByUserId(userId);
+			IsBookIssuedForUser = bookAdapter.getBookLookUpByUserId(userId);
 		} catch (DBException dbException) {
 			logger.error((dbException.toString() + "\n" + dbException.getMessage()));
 			throw new ServiceException(dbException);
