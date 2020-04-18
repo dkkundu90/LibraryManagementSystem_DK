@@ -6,4 +6,4 @@
 *.log
 /build/
 #Property loading path must not be checked in.
-/LoadProperties.java
+/util/LoadProperties.java
