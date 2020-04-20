@@ -8,7 +8,7 @@ public class BookBean {
 	private String authorName;
 	private Date issueDate;
 	private Date submissionDate;
-	private Date availaibilityDate;
+	private Date availabilityDate;
 	private Character readytoreIssue;
 	private Integer currentUserIssued;
 	private Integer genreId;
@@ -43,11 +43,11 @@ public class BookBean {
 	public void setSubmissionDate(Date submissionDate) {
 		this.submissionDate = submissionDate;
 	}
-	public Date getAvailaibilityDate() {
-		return availaibilityDate;
+	public Date getAvailabilityDate() {
+		return availabilityDate;
 	}
-	public void setAvailaibilityDate(Date availaibilityDate) {
-		this.availaibilityDate = availaibilityDate;
+	public void setAvailabilityDate(Date availaibilityDate) {
+		this.availabilityDate = availaibilityDate;
 	}
 	public Character getReadytoreIssue() {
 		return readytoreIssue;

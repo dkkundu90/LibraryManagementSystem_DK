@@ -6,6 +6,19 @@
 		<title>LogIn here</title>
 		<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
 		<link rel="stylesheet" href="Css/PageStyle.css">
+		<script language="JavaScript" type="text/javascript">
+			function validateLogInInfo() {
+				var adminName = document.credentialCheckContainer.adminName.value ;
+				var password = document.credentialCheckContainer.password.value;
+				
+				if (adminName == '' || password == '') {
+					 document.getElementById("credentialValidation").style = 'visibility: visible;';
+					 event.preventDefault();
+				 } else {
+					 document.getElementById("credentialValidation").style = 'visibility: hidden;'; 
+				 }
+			}
+		</script>
 	</head>
 	<body class="body" >
 		<h2 align="center">Library Management System</h2>
@@ -31,8 +44,15 @@
 			  <tr class="tr">
 			  	<td class="td"></td>
 			  	<td class="td">
-			  		<input type="submit" class="button" value="GO">
+			  		<input type="submit" onclick="javascript:validateLogInInfo()" class="button" value="GO">
 			  	</td>
+			  </tr>
+			</table>
+			<table id="credentialValidation" align="center" class="table" style="visibility: hidden;" >
+				<tr class="tr">
+				  	<td class="td">
+				  		<label style="font-family: 'Cambria'; font-size: 12px; color: red;" >**Please enter both the credentials.</label>
+				  	</td>
 			  </tr>
 			</table>
 		</form>

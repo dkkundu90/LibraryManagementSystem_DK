@@ -47,13 +47,15 @@ public class AdminAdapterImpl implements AdminAdapter {
 				logger.info("User exits. " + AdminAdapterImpl.class);
 				adminDao.setAdminId(rs.getInt(ApplicationConstants.VALUE_ONE));
 				adminDao.setAdminName(rs.getString(ApplicationConstants.VALUE_TWO));
+			} else {
+				logger.info("User does not exits. " + properties.getPropertyForValue("adapterExit") + AdminAdapterImpl.class);
 			}
+			
 		} catch(SQLException sqlException) {
 			logger.error((sqlException.getMessage()));
 			throw new DBException(sqlException);
 		} finally {
 			dataBaseConnection.closeConnection();
 		}
-		logger.info("User does not exits. " + properties.getPropertyForValue("adapterExit") + AdminAdapterImpl.class);
 	}
 }
