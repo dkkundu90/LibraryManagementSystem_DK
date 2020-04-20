@@ -36,45 +36,49 @@ public class UserCreationServlet extends HttpServlet {
     	properties = new LoadProperties();
 	}  
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		logger.info(properties.getPropertyForValue("servletEntry") + UserCreationServlet.class);
-		session = request.getSession(false);
-		userBean = new UserBean();
-		userService = new UserServiceImpl();
-		
-		if (request.getParameter("cancelOperation").equals(properties.getPropertyForValue("goBack"))) {
-			if (session != null) {
-				session.removeAttribute("genderListCreation");
-			}
-			
-			request.setAttribute("page", properties.getPropertyForValue("goBack"));
-		} else {
-			userBean.setFirstName(request.getParameter("userFirstName"));
-			userBean.setLastName(request.getParameter("userLastName"));
-			userBean.setAddress(request.getParameter("userAddress"));
-			userBean.setMobile(request.getParameter("userMobile"));
-			userBean.setEmail(request.getParameter("userEmail"));
-			userBean.setAge(Integer.parseInt(request.getParameter("userAge")));
-			userBean.setGender(request.getParameter("userGender"));
-			
-			try {
-				if (session != null) {
-					userBean = userService.saveUserInfo(userBean);
-				}
-			} catch (ServiceException serviceException) {
-				logger.error((serviceException.toString() + "\n" + serviceException.getMessage()));
-			} finally {
-				if (session != null) {
-					session.removeAttribute("genderListCreation");
-				}
-			}
-			
-			if (userBean.getUserId() != null) {
-				request.getServletContext().setAttribute("userCreated", new Boolean(true));
-			}
-			request.setAttribute("page", UserCreationServlet.class);
-		}
-		request.getRequestDispatcher(properties.getPropertyForValue("handelRequest")).forward(request, response);
-		logger.info(properties.getPropertyForValue("servletExit") + UserCreationServlet.class);
-	}
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	logger.info(properties.getPropertyForValue("servletEntry") + UserCreationServlet.class);
+    	session = request.getSession(false);
+    	userBean = new UserBean();
+    	userService = new UserServiceImpl();
+
+    	try {
+    		if (request.getParameter("cancelOperation").equals(properties.getPropertyForValue("goBack"))) {
+    			if (session != null) {
+    				session.removeAttribute("genderListCreation");
+    			}
+
+    			request.setAttribute("page", properties.getPropertyForValue("goBack"));
+    		} else {
+    			userBean.setFirstName(request.getParameter("userFirstName"));
+    			userBean.setLastName(request.getParameter("userLastName"));
+    			userBean.setAddress(request.getParameter("userAddress"));
+    			userBean.setMobile(request.getParameter("userMobile"));
+    			userBean.setEmail(request.getParameter("userEmail"));
+    			userBean.setAge(Integer.parseInt(request.getParameter("userAge")));
+    			userBean.setGender(request.getParameter("userGender"));
+
+
+    			if (session != null) {
+    				userBean = userService.saveUserInfo(userBean);
+    			}
+
+
+    			if (userBean.getUserId() != null) {
+    				request.getServletContext().setAttribute("userCreated", new Boolean(true));
+    			}
+    			request.setAttribute("page", UserCreationServlet.class);
+    		}
+    	} catch (ServiceException serviceException) {
+    		logger.error((serviceException.toString() + "\n" + serviceException.getMessage()));
+    		throw new ServletException(serviceException);
+    	} finally {
+    		if (session != null) {
+    			session.removeAttribute("genderListCreation");
+    		}
+    	}
+
+    	logger.info(properties.getPropertyForValue("servletExit") + UserCreationServlet.class);
+    	request.getRequestDispatcher(properties.getPropertyForValue("handelRequest")).forward(request, response);
+    }
 }

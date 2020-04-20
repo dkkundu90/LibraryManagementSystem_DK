@@ -5,6 +5,27 @@
     <param-name>log4j-config-location</param-name>
     <param-value>WEB-INF\log4j.properties</param-value>
   </context-param>
+  <context-param> 
+    <description>Location to store uploaded file</description> 
+    <param-name>file-upload</param-name> 
+    <param-value>D:\E\apache-tomcat-7.0.88\webapps\data</param-value> 
+  </context-param>
+  <error-page>
+	<error-code>404</error-code>
+	<location>/ErrorHandlerServlet</location>
+  </error-page>
+  <error-page>
+	<error-code>403</error-code>
+	<location>/ErrorHandlerServlet</location>
+  </error-page>
+  <error-page>
+    <exception-type>java.lang.Throwable</exception-type >
+    <location>/ErrorHandlerServlet</location>
+  </error-page>
+  <servlet>
+    <servlet-name>ErrorHandler</servlet-name>
+    <servlet-class>com.handler.servlets.ErrorHandlerServlet</servlet-class>
+  </servlet>
   <servlet>
     <servlet-name>LogIn</servlet-name>
     <servlet-class>com.handler.servlets.LogInServlet</servlet-class>
@@ -45,6 +66,14 @@
     <servlet-name>UserUpdation</servlet-name>
     <servlet-class>com.handler.servlets.UserUpdationServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>BookBulkUpload</servlet-name>
+    <servlet-class>com.handler.servlets.BookBulkUploadServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ErrorHandler</servlet-name>
+    <url-pattern>/ErrorHandlerServlet</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>LogIn</servlet-name>
     <url-pattern>/LogInServlet</url-pattern>
@@ -84,5 +113,9 @@
   <servlet-mapping>
     <servlet-name>UserUpdation</servlet-name>
     <url-pattern>/UserUpdationServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>BookBulkUpload</servlet-name>
+    <url-pattern>/BookBulkUploadServlet</url-pattern>
   </servlet-mapping>
 </web-app>

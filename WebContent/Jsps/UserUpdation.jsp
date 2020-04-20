@@ -80,6 +80,11 @@
 			  background-color: #dddddd;
 			}
 		</style>
+		<%
+			if (request.getSession(true).getAttribute("loggedOnUser") == null) {
+				response.sendRedirect("../LogIn.jsp");
+			}
+		%>
 	</head>
 	<body class="body" >
 		<form id="UserUpdation1" name="userUpdationContainer1" action="../UserUpdationServlet" method="get" >

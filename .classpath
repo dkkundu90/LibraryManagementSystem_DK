@@ -13,7 +13,6 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="D:/Jars/gson-2.2.4-sources.jar"/>
 	<classpathentry kind="lib" path="D:/Jars/jstl-1.2.jar"/>
 	<classpathentry kind="lib" path="D:/Jars/ojdbc6.jar"/>
 	<classpathentry kind="lib" path="D:/Jars/standard-1.1.2.jar"/>

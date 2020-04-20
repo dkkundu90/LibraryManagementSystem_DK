@@ -33,6 +33,8 @@ public class BookAdapterImpl implements BookAdapter {
 	public Integer save(BookDao bookDao) throws DBException {
 		logger.info(properties.getPropertyForValue("adapterEntry") + BookAdapterImpl.class);
 		Integer newBookId;
+		String sqlInsertQuery = null;
+		
 		try {
 			dataBaseConnection = new DataBaseConnection();
 			Connection con = dataBaseConnection.newConnection();
@@ -46,20 +48,16 @@ public class BookAdapterImpl implements BookAdapter {
 			if (bookSequenceResultSet.next()) {
 				newBookId = bookSequenceResultSet.getInt(ApplicationConstants.VALUE_ONE);
 			}
-			
-			String sqlInsertQuery = properties.getPropertyForValue("bookInsert");
+			sqlInsertQuery = properties.getPropertyForValue("bookInsert");
 			preparedStatement = con.prepareStatement(sqlInsertQuery);
 			
 			preparedStatement.setInt(ApplicationConstants.VALUE_ONE, newBookId);
 			if (bookDao != null) {
 				preparedStatement.setString(ApplicationConstants.VALUE_TWO, bookDao.getBookName());
 				preparedStatement.setString(ApplicationConstants.VALUE_THREE, bookDao.getAuthorName());
-				preparedStatement.setTimestamp(ApplicationConstants.VALUE_FOUR, bookDao.getIssueDate());
-				preparedStatement.setTimestamp(ApplicationConstants.VALUE_FIVE, bookDao.getSubmissionDate());
-				preparedStatement.setTimestamp(ApplicationConstants.VALUE_SIX, bookDao.getAvailaibilityDate());
-				preparedStatement.setString(ApplicationConstants.VALUE_SEVEN, bookDao.getReadytoreIssue().toString());
-				preparedStatement.setInt(ApplicationConstants.VALUE_EIGHT, bookDao.getCurrentUserIssued());
-				preparedStatement.setInt(ApplicationConstants.VALUE_NINE, bookDao.getGenreId());
+				preparedStatement.setTimestamp(ApplicationConstants.VALUE_FOUR, bookDao.getAvailabilityDate());
+				preparedStatement.setString(ApplicationConstants.VALUE_FIVE, bookDao.getReadytoreIssue().toString());
+				preparedStatement.setInt(ApplicationConstants.VALUE_SIX, bookDao.getGenreId());
 			}
 			
 			insertionCompletionStatus = preparedStatement.executeUpdate();
@@ -101,7 +99,7 @@ public class BookAdapterImpl implements BookAdapter {
 				bookDao.setCurrentUserIssued(rs.getInt(ApplicationConstants.VALUE_FOUR));
 				bookDao.setIssueDate(rs.getTimestamp(ApplicationConstants.VALUE_FIVE));
 				bookDao.setSubmissionDate(rs.getTimestamp(ApplicationConstants.VALUE_SIX));
-				bookDao.setAvailaibilityDate(rs.getTimestamp(ApplicationConstants.VALUE_SEVEN));
+				bookDao.setAvailabilityDate(rs.getTimestamp(ApplicationConstants.VALUE_SEVEN));
 				bookDao.setReadytoreIssue(rs.getString(ApplicationConstants.VALUE_EIGHT).charAt(ApplicationConstants.VALUE_ZERO));
 				bookDao.setGenreId(rs.getInt(ApplicationConstants.VALUE_NINE));
 				

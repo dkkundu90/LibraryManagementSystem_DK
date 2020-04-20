@@ -17,6 +17,11 @@
 					validateAddition();
 				}
 			</script>
+			<%
+				if (request.getSession(true).getAttribute("loggedOnUser") == null) {
+					response.sendRedirect("../LogIn.jsp");
+				}
+			%>
 		</head>
 		<body>
 			<form id="UserRegistration" name="userRegistrationContainer" action="../UserCreationServlet" method="post">

@@ -34,6 +34,11 @@
 			  background-color: #dddddd;
 			}
 		</style>
+		<%
+			if (request.getSession(true).getAttribute("loggedOnUser") == null) {
+				response.sendRedirect("../LogIn.jsp");
+			}
+		%>
 	</head>
 	<body class="body" >
 		<form id="UserView" name="userViewContainer" action="../UserViewServlet" method="post" >

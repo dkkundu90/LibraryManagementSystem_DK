@@ -33,6 +33,11 @@
 			  background-color: #dddddd;
 			}
 		</style>
+		<%
+			if (request.getSession(true).getAttribute("loggedOnUser") == null) {
+				response.sendRedirect("../LogIn.jsp");
+			}
+		%>
 	</head>
 	<body>
 		<table class="table">

@@ -47,7 +47,7 @@ public class LogInServlet extends HttpServlet {
 			
 			try {
 				adminBean = adminService.readLogInInfo(adminBean);
-				request.setAttribute("basicUserInfo", adminBean);
+				request.setAttribute("adminInfo", adminBean);
 				if (adminBean.getAdminId()!= null) {
 					HttpSession session = request.getSession();
 					session.setAttribute("loggedOnUser", adminBean);
@@ -55,13 +55,14 @@ public class LogInServlet extends HttpServlet {
 				}
 			} catch (ServiceException serviceException) {
 				logger.error((serviceException.toString() + "\n" + serviceException.getMessage()));
+				throw new ServletException(serviceException);
 			}
 		} else {
 			request.getSession(false).invalidate();
 		}
-		
 		request.setAttribute("page", LogInServlet.class);
-		request.getRequestDispatcher(properties.getPropertyForValue("handelRequest")).forward(request, response);
+		
 		logger.info(properties.getPropertyForValue("servletExit") + LogInServlet.class);
+		request.getRequestDispatcher(properties.getPropertyForValue("handelRequest")).forward(request, response);
 	}
 }

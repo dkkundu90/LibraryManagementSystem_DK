@@ -21,6 +21,6 @@ public class ContextListener implements ServletContextListener {
 	}
 
 	@Override
-	public void contextDestroyed(ServletContextEvent arg0) { }
+	public void contextDestroyed(ServletContextEvent servletContextEvent) { }
 	 
 }

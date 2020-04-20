@@ -13,6 +13,7 @@
 				var isUserCreatedSuccessfully = document.logInHomeContainer.userCreationCheck.value;
 				var isUserDeletedSuccessfully = document.logInHomeContainer.userDeletionCheck.value;
 				var isUserUpdatedSuccessfully = document.logInHomeContainer.userUpdationCheck.value;
+				var isBookBulkUploadedSuccessfully = document.logInHomeContainer.bookBulkUploadCheck.value;
 				
 			    if (isUserCreatedSuccessfully == "true") {
 			    	document.getElementById("successMessageCreation").style = 'visibility: visible; color: ##003300; font-style: italic; font-weight: bold; text-align: center;';
@@ -25,6 +26,10 @@
 			    if (isUserUpdatedSuccessfully == "true") {
 			    	document.getElementById("successMessageUpdation").style = 'visibility: visible; color: ##003300; font-style: italic; font-weight: bold; text-align: center;';
 			    }
+			    
+			    if (isBookBulkUploadedSuccessfully == "true") {
+			    	document.getElementById("successMessageBookBulkUpload").style = 'visibility: visible; color: ##003300; font-style: italic; font-weight: bold; text-align: center;';
+			    }
 			    window.history.forward();
 			}
 		    setTimeout("pageLoad()", 0);
@@ -36,7 +41,12 @@
 			window.onload = pageLoad;
 		</script>
 		
-		<%@page import="com.data.bean.AdminBean"%>					
+		<%@page import="com.data.bean.AdminBean"%>
+		<%
+			if (request.getSession(true).getAttribute("loggedOnUser") == null) {
+				response.sendRedirect("../LogIn.jsp");
+			}
+		%>					
 	</head>
 	<body class="body">
 		<table align="right" >
@@ -150,7 +160,7 @@
 							</tr>
 							<tr class="linktr" >
 								<td colspan="3" >
-									<a href="javascript:submitForm('createUser')" class="link" >Book Bulk Upload</a>
+									<a href="javascript:submitForm('bookBulkUpload')" class="link" >Book Bulk Upload</a>
 								</td>
 							</tr>
 						</table>
@@ -164,6 +174,13 @@
 					</td>
 				</tr>
 			</table>
+			<table align="center">
+			<tr>
+				<td>
+					<h4><label id="successMessageBookBulkUpload" style="visibility: hidden;" >Total <c:out value="${ NoOfBookUploaded }"></c:out> Book/Books have been added successfully. Happy Managing!!!</label></h4>
+				</td>
+			</tr>
+		</table>
 			<%
 			  	Boolean isUserCreated = (Boolean)request.getServletContext().getAttribute("userCreated");
 		  		request.getServletContext().setAttribute("userCreated", new Boolean(false));
@@ -173,10 +190,14 @@
 		  		
 		  		Boolean isUserUpdated = (Boolean)request.getServletContext().getAttribute("userUpdated");
 		  		request.getServletContext().setAttribute("userUpdated", new Boolean(false));
+		  		
+		  		Boolean isBookBulkUploaded = (Boolean)request.getServletContext().getAttribute("bookBulkUploaded");
+		  		request.getServletContext().setAttribute("bookBulkUploaded", new Boolean(false));
 			%>
 			<input type="hidden" name="userCreationCheck" value="<%=isUserCreated%>">
 			<input type="hidden" name="userDeletionCheck" value="<%=isUserDeleted%>">
 			<input type="hidden" name="userUpdationCheck" value="<%=isUserUpdated%>">
+			<input type="hidden" name="bookBulkUploadCheck" value="<%=isBookBulkUploaded%>">
 		</form>
 	</body>
 </html>

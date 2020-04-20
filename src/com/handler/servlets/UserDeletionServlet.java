@@ -58,11 +58,13 @@ public class UserDeletionServlet extends HttpServlet {
 				}
 			} catch (ServiceException serviceException) {
 				logger.error((serviceException.toString() + "\n" + serviceException.getMessage()));
+				throw new ServletException(serviceException);
 			}
 			
 			request.setAttribute("page", UserDeletionServlet.class);
 		}
-		request.getRequestDispatcher(properties.getPropertyForValue("handelRequest")).forward(request, response);
+		
 		logger.info(properties.getPropertyForValue("servletExit") + UserDeletionServlet.class);
+		request.getRequestDispatcher(properties.getPropertyForValue("handelRequest")).forward(request, response);
 	}
 }
