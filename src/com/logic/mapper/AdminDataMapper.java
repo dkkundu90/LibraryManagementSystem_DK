@@ -10,7 +10,7 @@ public class AdminDataMapper {
 	public AdminDao mapBeanDataToDao(AdminBean adminBean) {
 		adminDao = new AdminDao();
 		
-		adminDao.setAdminName(adminBean.getAdminName().toUpperCase());
+		adminDao.setAdminName(adminBean.getAdminName());
 		adminDao.setPassword(adminBean.getPassword());
 		
 		return adminDao;
