@@ -31,7 +31,6 @@ public class ErrorHandlerServlet extends HttpServlet {
     @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	logger.info(properties.getPropertyForValue("servletEntry") + ErrorHandlerServlet.class);
-    	request.setAttribute("page", ErrorHandlerServlet.class);
     	HttpSession session = request.getSession(false);
 		if (session != null) {
 			session.invalidate();
