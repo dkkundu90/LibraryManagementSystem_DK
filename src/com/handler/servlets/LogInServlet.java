@@ -34,34 +34,36 @@ public class LogInServlet extends HttpServlet {
     	properties = new LoadProperties();
 	}
     
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		logger.info(properties.getPropertyForValue("servletEntry") + LogInServlet.class);
-		adminBean = new AdminBean();
-		adminService = new AdminServiceImpl();
-		String adminName = request.getParameter("adminName");
-		String password = request.getParameter("password");
-		
-		if (adminName != "" && password != "") {
-			adminBean.setAdminName(adminName);
-			adminBean.setPassword(password);
-			
-			try {
-				adminBean = adminService.readLogInInfo(adminBean);
-				request.setAttribute("basicUserInfo", adminBean);
-				if (adminBean.getAdminId()!= null) {
-					HttpSession session = request.getSession();
-					session.setAttribute("loggedOnUser", adminBean);
-					session.setMaxInactiveInterval(Integer.parseInt(properties.getPropertyForValue("sessionTimeout")));
-				}
-			} catch (ServiceException serviceException) {
-				logger.error((serviceException.toString() + "\n" + serviceException.getMessage()));
-			}
-		} else {
-			request.getSession(false).invalidate();
-		}
-		
-		request.setAttribute("page", LogInServlet.class);
-		request.getRequestDispatcher(properties.getPropertyForValue("handelRequest")).forward(request, response);
-		logger.info(properties.getPropertyForValue("servletExit") + LogInServlet.class);
-	}
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	logger.info(properties.getPropertyForValue("servletEntry") + LogInServlet.class);
+    	adminBean = new AdminBean();
+    	adminService = new AdminServiceImpl();
+    	String adminName = request.getParameter("adminName");
+    	String password = request.getParameter("password");
+
+    	try {
+    		if (adminName != "" && password != "") {
+    			adminBean.setAdminName(adminName);
+    			adminBean.setPassword(password);
+
+    			adminBean = adminService.readLogInInfo(adminBean);
+    			request.setAttribute("adminInfo", adminBean);
+    			if (adminBean.getAdminId()!= null) {
+    				HttpSession session = request.getSession();
+    				session.setAttribute("loggedOnUser", adminBean);
+    				session.setMaxInactiveInterval(Integer.parseInt(properties.getPropertyForValue("sessionTimeout")));
+    			}
+
+    		} else {
+    			request.getSession(false).invalidate();
+    		}
+    		request.setAttribute("page", LogInServlet.class);
+    	} catch (ServiceException serviceException) {
+    		logger.error((serviceException.toString() + "\n" + serviceException.getMessage()));
+    		throw new ServletException(serviceException);
+    	}
+
+    	logger.info(properties.getPropertyForValue("servletExit") + LogInServlet.class);
+    	request.getRequestDispatcher(properties.getPropertyForValue("handelRequest")).forward(request, response);
+    }
 }

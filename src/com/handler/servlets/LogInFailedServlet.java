@@ -29,11 +29,14 @@ public class LogInFailedServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		logger.info(properties.getPropertyForValue("servletEntry") + LogInFailedServlet.class);
-		
-		request.setAttribute("page", LogInFailedServlet.class);
-		request.getRequestDispatcher(properties.getPropertyForValue("handelRequest")).forward(request, response);
-		
-		logger.info(properties.getPropertyForValue("servletExit") + LogInFailedServlet.class);
+		try {
+			request.setAttribute("page", LogInFailedServlet.class);
+			
+			logger.info(properties.getPropertyForValue("servletExit") + LogInFailedServlet.class);
+			request.getRequestDispatcher(properties.getPropertyForValue("handelRequest")).forward(request, response);
+		} catch (Exception exception) {
+			logger.error((exception.toString() + "\n" + exception.getMessage()));
+			throw new ServletException(exception);
+		}
 	}
-
 }

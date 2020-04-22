@@ -30,14 +30,18 @@ public class LogOutServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		logger.info(properties.getPropertyForValue("servletEntry") + LogOutServlet.class);
-		
-		HttpSession session = request.getSession(false);
-		if (session != null) {
-			session.invalidate();
+		try {
+			HttpSession session = request.getSession(false);
+			if (session != null) {
+				session.invalidate();
+			}
+			request.setAttribute("page", LogOutServlet.class);
+			
+			logger.info(properties.getPropertyForValue("servletExit") + LogOutServlet.class);
+			request.getRequestDispatcher(properties.getPropertyForValue("handelRequest")).forward(request, response);
+		} catch (Exception exception) {
+			logger.error((exception.toString() + "\n" + exception.getMessage()));
+			throw new ServletException(exception);
 		}
-		request.setAttribute("page", LogOutServlet.class);
-		request.getRequestDispatcher(properties.getPropertyForValue("handelRequest")).forward(request, response);
-		
-		logger.info(properties.getPropertyForValue("servletExit") + LogOutServlet.class);
 	}
 }

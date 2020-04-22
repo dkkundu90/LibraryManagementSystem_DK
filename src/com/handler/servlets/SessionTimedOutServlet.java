@@ -28,12 +28,15 @@ public class SessionTimedOutServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		logger.info(properties.getPropertyForValue("servletEntry") + SessionTimedOutServlet.class);
-		
-		request.getSession(false).invalidate();
-		request.setAttribute("page", SessionTimedOutServlet.class);
-		request.getRequestDispatcher(properties.getPropertyForValue("handelRequest")).forward(request, response);
-		
-		logger.info(properties.getPropertyForValue("servletExit") + SessionTimedOutServlet.class);
+		try {
+			request.getSession(false).invalidate();
+			request.setAttribute("page", SessionTimedOutServlet.class);
+			
+			logger.info(properties.getPropertyForValue("servletExit") + SessionTimedOutServlet.class);
+			request.getRequestDispatcher(properties.getPropertyForValue("handelRequest")).forward(request, response);
+		} catch (Exception exception) {
+			logger.error((exception.toString() + "\n" + exception.getMessage()));
+			throw new ServletException(exception);
+		}
 	}
-
 }

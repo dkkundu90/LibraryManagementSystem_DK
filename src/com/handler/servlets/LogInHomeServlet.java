@@ -28,14 +28,22 @@ public class LogInHomeServlet extends HttpServlet {
     
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		logger.info(properties.getPropertyForValue("servletEntry") + LogInHomeServlet.class);
-		String selection = request.getParameter("userSelection");
-		if (selection != null && selection != "") {
-			request.setAttribute("page", selection);
-			request.getRequestDispatcher(properties.getPropertyForValue("handelRequest")).forward(request, response);
-		} else {
-			request.setAttribute("page", LogInHomeServlet.class);
-			request.getRequestDispatcher(properties.getPropertyForValue("handelRequest")).forward(request, response);
+		try {
+			String selection = request.getParameter("userSelection");
+			if (selection != null && selection != "") {
+				request.setAttribute("page", selection);
+				
+				logger.info(properties.getPropertyForValue("servletExit") + LogInHomeServlet.class);
+				request.getRequestDispatcher(properties.getPropertyForValue("handelRequest")).forward(request, response);
+			} else {
+				request.setAttribute("page", LogInHomeServlet.class);
+				
+				logger.info(properties.getPropertyForValue("servletExit") + LogInHomeServlet.class);
+				request.getRequestDispatcher(properties.getPropertyForValue("handelRequest")).forward(request, response);
+			}
+		} catch (Exception exception) {
+			logger.error((exception.toString() + "\n" + exception.getMessage()));
+			throw new ServletException(exception);
 		}
-		logger.info(properties.getPropertyForValue("servletExit") + LogInHomeServlet.class);
 	}
 }

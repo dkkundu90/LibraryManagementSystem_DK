@@ -32,9 +32,8 @@ public class AdminServiceImpl implements  AdminService {
 		adminDataMapper = new AdminDataMapper();
 		adminAdapter = new AdminAdapterImpl();
 		
-		adminDao = adminDataMapper.mapBeanDataToDao(adminBean);
-		
 		try {
+			adminDao = adminDataMapper.mapBeanDataToDao(adminBean);
 			adminAdapter.getAdminLookupById(adminDao);
 			adminBean = adminDataMapper.mapDaoDataToBean(adminDao);
 		} catch (DBException dbException) {

@@ -47,15 +47,16 @@ public class UserUpdationServlet extends HttpServlet {
 			try {
 				userBean = userService.readUserInfoById(userId);
 			} catch (ServiceException serviceException) {
-				logger.error((serviceException.toString() + "\n" + serviceException.getMessage())); 
+				logger.error((serviceException.toString() + "\n" + serviceException.getMessage()));
+				throw new ServletException(serviceException);
 			}
 			session.setAttribute("userValue", userBean);
 		}
 		request.setAttribute("page", UserUpdationServlet.class); 
 		request.getServletContext().setAttribute("userUpdationReady", new Boolean(true));
 		
-		request.getRequestDispatcher(properties.getPropertyForValue("handelRequest")).forward(request, response);
 		logger.info(properties.getPropertyForValue("servletExit") + UserUpdationServlet.class);
+		request.getRequestDispatcher(properties.getPropertyForValue("handelRequest")).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException {
@@ -92,6 +93,7 @@ public class UserUpdationServlet extends HttpServlet {
 				} 
 			} catch (ServiceException serviceException) {
 				logger.error((serviceException.toString() + "\n" + serviceException.getMessage())); 
+				throw new ServletException(serviceException);
 			} finally {
 				session.removeAttribute("userValue");
 				session.removeAttribute("genderListUpdation");
@@ -99,7 +101,8 @@ public class UserUpdationServlet extends HttpServlet {
 			}
 			request.setAttribute("page", UserUpdationServlet.class); 
 		}
-		request.getRequestDispatcher(properties.getPropertyForValue("handelRequest")).forward(request, response);
+		
 		logger.info(properties.getPropertyForValue("servletExit") + UserUpdationServlet.class);
+		request.getRequestDispatcher(properties.getPropertyForValue("handelRequest")).forward(request, response);
 	}
 }

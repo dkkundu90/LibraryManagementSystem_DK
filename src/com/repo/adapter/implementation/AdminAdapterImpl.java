@@ -30,6 +30,7 @@ public class AdminAdapterImpl implements AdminAdapter {
 	@Override
 	public void getAdminLookupById(AdminDao adminDao) throws DBException {
 		logger.info(properties.getPropertyForValue("adapterEntry") + AdminAdapterImpl.class);
+		Boolean adminSearchFlag = ApplicationConstants.VALUE_FALSE;
 		try {
 			dataBaseConnection = new DataBaseConnection();
 			Connection con = dataBaseConnection.newConnection();  
@@ -37,16 +38,22 @@ public class AdminAdapterImpl implements AdminAdapter {
 			String sqlQuery = properties.getPropertyForValue("logInSelect");
 			
 			preparedStatement = con.prepareStatement(sqlQuery); 
-			if (adminDao != null) {
-				preparedStatement.setString(ApplicationConstants.VALUE_ONE, adminDao.getAdminName());
-				preparedStatement.setString(ApplicationConstants.VALUE_TWO, adminDao.getPassword());
-			}
 			ResultSet rs = preparedStatement.executeQuery();
 			
-			if(rs.next()) {
-				logger.info("User exits. " + AdminAdapterImpl.class);
-				adminDao.setAdminId(rs.getInt(ApplicationConstants.VALUE_ONE));
-				adminDao.setAdminName(rs.getString(ApplicationConstants.VALUE_TWO));
+			while (rs.next()) {
+				if (adminDao.getAdminName().equalsIgnoreCase(rs.getString(ApplicationConstants.VALUE_TWO))
+						&& adminDao.getPassword().equals(rs.getString(ApplicationConstants.VALUE_THREE))) {
+					logger.info("User exits. " + AdminAdapterImpl.class);
+					
+					adminDao.setAdminId(rs.getInt(ApplicationConstants.VALUE_ONE));
+					adminDao.setAdminName(rs.getString(ApplicationConstants.VALUE_TWO));
+					adminSearchFlag = ApplicationConstants.VALUE_TRUE;
+					break;
+				}
+			}
+			
+			if(!adminSearchFlag) {
+				logger.info("User does not exits. " + properties.getPropertyForValue("adapterExit") + AdminAdapterImpl.class);	
 			}
 		} catch(SQLException sqlException) {
 			logger.error((sqlException.getMessage()));
@@ -54,6 +61,5 @@ public class AdminAdapterImpl implements AdminAdapter {
 		} finally {
 			dataBaseConnection.closeConnection();
 		}
-		logger.info("User does not exits. " + properties.getPropertyForValue("adapterExit") + AdminAdapterImpl.class);
 	}
 }

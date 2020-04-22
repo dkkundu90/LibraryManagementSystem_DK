@@ -31,12 +31,18 @@ public class UserViewServlet extends HttpServlet {
     
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		logger.info(properties.getPropertyForValue("servletEntry") + UserCreationServlet.class);
-		session = request.getSession(false);
-		request.setAttribute("page", UserViewServlet.class);
-		if (session != null) {
-			session.removeAttribute("userValuesForView");
+		try {
+			session = request.getSession(false);
+			request.setAttribute("page", UserViewServlet.class);
+			if (session != null) {
+				session.removeAttribute("userValuesForView");
+			}
+		} catch (Exception exception) {
+			logger.error((exception.toString() + "\n" + exception.getMessage()));
+			throw new ServletException(exception);
 		}
-		request.getRequestDispatcher(properties.getPropertyForValue("handelRequest")).forward(request, response);
+		
 		logger.info(properties.getPropertyForValue("servletExit") + UserCreationServlet.class);
+		request.getRequestDispatcher(properties.getPropertyForValue("handelRequest")).forward(request, response);
 	}
 }

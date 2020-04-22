@@ -8,7 +8,7 @@ public class BookDao {
 	private String authorName;
 	private Timestamp issueDate;
 	private Timestamp submissionDate;
-	private Timestamp availaibilityDate;
+	private Timestamp availabilityDate;
 	private Character readytoreIssue;
 	private Integer currentUserIssued;
 	private Integer genreId;
@@ -43,11 +43,11 @@ public class BookDao {
 	public void setSubmissionDate(Timestamp submissionDate) {
 		this.submissionDate = submissionDate;
 	}
-	public Timestamp getAvailaibilityDate() {
-		return availaibilityDate;
+	public Timestamp getAvailabilityDate() {
+		return availabilityDate;
 	}
-	public void setAvailaibilityDate(Timestamp availaibilityDate) {
-		this.availaibilityDate = availaibilityDate;
+	public void setAvailabilityDate(Timestamp availabilityDate) {
+		this.availabilityDate = availabilityDate;
 	}
 	public Character getReadytoreIssue() {
 		return readytoreIssue;
